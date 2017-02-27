@@ -9,9 +9,12 @@
 <h2><a href="/blog/{{ post.key().id() }}">{{ post.title }}</a></h2>
 <p>{{ post.body }}</p>
 <!-- TODO add author w/ link to author's blog page -->
-
+<p class="post-author">
+    written by
+    <a href="/blog/{{ post.author.username }}" title="{{ post.author.username }}'s blog">{{ post.author.username }}</a>
+    on {{ post.created.strftime('%Y-%m-%d') }}
 {% endfor %}
-
+</br></br>
 {% if username %}
     {% if prev_page %}
     <a href="/blog/{{ username }}?page={{ prev_page }}">&lt; prev</a>
