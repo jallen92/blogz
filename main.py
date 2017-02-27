@@ -153,6 +153,7 @@ class ViewPostHandler(BlogHandler):
         """ Render a page with post determined by the id (via the URL/permalink) """
 
         post = Post.get_by_id(int(id))
+        author = post.author.username
         if post:
             t = jinja_env.get_template("post.html")
             response = t.render(post=post)
