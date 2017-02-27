@@ -21,7 +21,9 @@ class BlogHandler(webapp2.RequestHandler):
         """
 
         # TODO - filter the query so that only posts by the given user
-        return None
+        query = Post.all().filter("author", user).order('-created')
+        posts = query.fetch(limit=limit, offset=offset)
+        return posts
 
     def get_user_by_name(self, username):
         """ Get a user object from the db, based on their username """
@@ -87,6 +89,7 @@ class BlogIndexHandler(BlogHandler):
             page = 1
 
         # Fetch posts for all users, or a specific user, depending on request parameters
+
         if username:
             user = self.get_user_by_name(username)
             posts = self.get_posts_by_user(user, self.page_size, offset)
